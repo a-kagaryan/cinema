@@ -15,7 +15,7 @@ class CreateHallsTable extends Migration
     {
         Schema::create('halls', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->tinyInteger('vertical_lines')->default(10);
             $table->tinyInteger('horizontal_lines')->default(10);
         });

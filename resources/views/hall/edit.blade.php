@@ -3,8 +3,8 @@
 @section('content')
     <div class="row">
         <div class="col-10 mx-auto">
-            <h1>Create Hall</h1>
-            {{ view('hall._form', ['hall' => $hall, 'method' => 'POST', 'action' => 'store']) }}
+            <h1>Edit Hall</h1>
+            {{ view('hall._form', ['hall' => $hall, 'method' => 'PUT', 'action' => 'update']) }}
         </div>
     </div>
 @endsection

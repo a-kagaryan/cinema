@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Seat extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'code',
+        'hall_id',
+        'x',
+        'y'
+    ];
 }

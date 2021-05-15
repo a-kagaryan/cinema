@@ -2,7 +2,7 @@
 
 ?>
 
-{!! Form::model($hall, ['route' => 'halls.store', $hall->id, 'method' => $method]) !!}
+{!! Form::model($hall, ['route' => ["halls.$action", $hall->id], 'method' => $method]); !!}
 @if ($errors->any())
     <div class="alert alert-danger">
         <ol>
@@ -12,14 +12,14 @@
         </ol>
     </div>
 @endif
-{{ Form::label('title', 'Name') }}
-{{ Form::text('title') }}
+{{ Form::label('name', 'Name') }}
+{{ Form::text('name', $hall->name) }}
 
 {{ Form::label('vertical_lines', 'Vertical lines Count') }}
-{{ Form::number('vertical_lines') }}
+{{ Form::number('vertical_lines', $hall->vertical_llines ?: 10) }}
 
 {{ Form::label('horizontal_lines', 'Horizontal lines Count') }}
-{{ Form::number('horizontal_lines') }}
+{{ Form::number('horizontal_lines', $hall->horizontal_llines ?: 10 ) }}
 
 {{ Form::submit('Save') }}
 

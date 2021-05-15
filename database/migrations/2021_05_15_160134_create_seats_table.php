@@ -17,8 +17,14 @@ class CreateSeatsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('hall_id');
             $table->string('code');
-            $table->integer('row');
-            $table->integer('col');
+            $table->integer('y');
+            $table->integer('x');
+
+            $table->foreign('hall_id')
+                ->references('id')
+                ->on('halls')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
