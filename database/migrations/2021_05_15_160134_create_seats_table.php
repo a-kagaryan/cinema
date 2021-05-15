@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHallsTable extends Migration
+class CreateSeatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateHallsTable extends Migration
      */
     public function up()
     {
-        Schema::create('halls', function (Blueprint $table) {
+        Schema::create('seats', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->tinyInteger('vertical_lines')->default(10);
-            $table->tinyInteger('horizontal_lines')->default(10);
+            $table->unsignedBigInteger('hall_id');
+            $table->string('code');
+            $table->integer('row');
+            $table->integer('col');
         });
     }
 
@@ -28,6 +29,6 @@ class CreateHallsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('halls');
+        Schema::dropIfExists('seats');
     }
 }
