@@ -17,4 +17,9 @@ class Seat extends Model
         'x',
         'y'
     ];
+
+    public function hall()
+    {
+        return $this->belongsTo(Hall::class);
+    }
 }

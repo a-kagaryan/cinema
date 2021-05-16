@@ -42,12 +42,17 @@ class FilmController extends Controller
     {
         $request->validate(array_merge(
                 Film::$rules,
-                ['file' => 'mimes:png,jpg,jpeg|max:2048']
+                ['file' => 'required|mimes:png,jpg,jpeg|max:2048']
             )
         );
 
-        $path = $request->file('file')->store('wallpapers',  ['disk' => 'public']);
         $fields = $request->except('_token');
+
+        if (!empty($request->file('file'))) {
+            $path = $request->file('file')->store('wallpapers',  ['disk' => 'public']);
+            $fields['wallpaper'] = $path;
+        }
+
         $fields['wallpaper'] = $path;
 
         try {
