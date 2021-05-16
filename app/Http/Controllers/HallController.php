@@ -7,6 +7,7 @@ use App\Models\Seat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\View\View;
 
 class HallController extends Controller
 {
@@ -17,13 +18,13 @@ class HallController extends Controller
      */
     public function index()
     {
-        return view('hall.index', ['halls' => Hall::all()]);
+        return view('hall.index', ['halls' => Hall::paginate(10)]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {

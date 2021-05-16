@@ -4,27 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Film;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
+use MongoDB\Driver\Session;
 
 class FilmController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
-        //
+        return view('film.index', ['films' => Film::paginate(10)]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
-        //
+        return view('film.create', ['film' => new Film()]);
     }
 
     /**
@@ -35,7 +40,28 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(array_merge(
+                Film::$rules,
+                ['file' => 'mimes:png,jpg,jpeg|max:2048']
+            )
+        );
+
+        $path = $request->file('file')->store('wallpapers',  ['disk' => 'public']);
+        $fields = $request->except('_token');
+        $fields['wallpaper'] = $path;
+
+        try {
+            $film = Film::create($fields);
+        } catch(\PDOException $e) {
+            Log::error($e->getMessage(), $request->all());
+
+            return back()
+                ->with('error','Something went wrong');
+        }
+
+        return redirect()
+            ->route('films.show', ['film' => $film] )
+            ->with('success','Film was created Successfully');
     }
 
     /**
@@ -46,7 +72,7 @@ class FilmController extends Controller
      */
     public function show(Film $film)
     {
-        //
+        return view('film.view', ['film' => $film]);
     }
 
     /**
@@ -57,7 +83,7 @@ class FilmController extends Controller
      */
     public function edit(Film $film)
     {
-        //
+        return view('film.edit', ['film' => $film]);
     }
 
     /**
@@ -69,7 +95,32 @@ class FilmController extends Controller
      */
     public function update(Request $request, Film $film)
     {
-        //
+        $request->validate(array_merge(
+                Film::$rules,
+                ['file' => 'mimes:png,jpg,jpeg|max:2048']
+            )
+        );
+
+        $fields = $request->except('_token');
+
+        if (!empty($request->file('file'))) {
+            Storage::delete('public/'. $film->wallpaper );
+            $path = $request->file('file')->store('wallpapers',  ['disk' => 'public']);
+            $fields['wallpaper'] = $path;
+        }
+
+        try {
+             $film->update($fields);
+        } catch(\PDOException $e) {
+            Log::error($e->getMessage(), $request->all());
+
+            return back()
+                ->with('error', 'Could not update Film');
+        }
+
+        return redirect()
+            ->route('films.show', ['film' => $film] )
+            ->with('success','Film was created Successfully');
     }
 
     /**

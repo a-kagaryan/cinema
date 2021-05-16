@@ -28,8 +28,9 @@
                                                      document.getElementById('view-form').submit();" >
                                     <i class="fa fa-trash">delete</i>
                                 </a>
-                                <form id="view-form" action="{{ route('halls.destroy', [$hall->id]) }}" method="DELETE" class="d-none">
+                                <form id="view-form" action="{{ route('halls.destroy', [$hall->id]) }}" method="post" class="d-none">
                                     @csrf
+                                    @method('DELETE')
                                     <input type="hidden" value="{{ $hall->id }}">
                                 </form>
                             </td>
@@ -37,6 +38,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $halls->links() }}
         </div>
     </div>
 @endsection

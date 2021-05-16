@@ -19,8 +19,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resources([
-    'halls' => \App\Http\Controllers\HallController::class
-]);
+Route::group(['middleware' => 'auth'], function()
+{
+    Route::resources([
+        'halls' => \App\Http\Controllers\HallController::class,
+        'films' => \App\Http\Controllers\FilmController::class
+    ]);
+});
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
