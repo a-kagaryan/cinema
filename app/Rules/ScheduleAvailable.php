@@ -5,7 +5,6 @@ namespace App\Rules;
 use App\Models\Schedule;
 use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Rule;
-use Illuminate\Support\Facades\DB;
 
 class ScheduleAvailable implements Rule
 {

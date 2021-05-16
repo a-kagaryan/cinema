@@ -4,6 +4,8 @@
     <div class="row">
         <div class="col-10 mx-auto">
             <h1>Halls</h1>
+            <a class="btn btn-success" href="{{route('halls.create')}}">Create</a>
+
             <table class="table table-bordered">
                 <thead>
                     <tr>

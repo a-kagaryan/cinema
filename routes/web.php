@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\AppController::class, 'index']);
 Route::get('/hall/{hall}', [App\Http\Controllers\AppController::class, 'hall'])->name('hall');
 Route::get('/seance/{schedule}', [App\Http\Controllers\AppController::class, 'seance'])->name('seance');
+Route::get('/order/{scheduleId}/{seatId}', [App\Http\Controllers\AppController::class, 'order'])->name('order');
 
 Auth::routes();
 

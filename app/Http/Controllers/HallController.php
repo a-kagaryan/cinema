@@ -14,7 +14,7 @@ class HallController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
@@ -62,7 +62,7 @@ class HallController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Hall  $hall
+     * @param  \App\Models\Hall $hall
      */
     public function show(Hall $hall)
     {
@@ -112,12 +112,12 @@ class HallController extends Controller
 
             return redirect()
                 ->route('halls.edit', ['hall' => $hall])
-                ->with('message', 'Could not update Hall');
+                ->with('error', 'Could not update Hall');
         }
 
         return redirect()
             ->route('halls.show', ['hall' => $hall])
-            ->with('message', 'Post updated successfully.');
+            ->with('success', 'Post updated successfully.');
     }
 
     /**
@@ -131,6 +131,6 @@ class HallController extends Controller
 
         return redirect()
             ->route('halls.index')
-            ->with('message', 'Hall has been deleted');
+            ->with('success', 'Hall has been deleted');
     }
 }

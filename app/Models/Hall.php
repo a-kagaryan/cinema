@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,6 +27,17 @@ class Hall extends Model
     public function seats()
     {
         return $this->hasMany(Seat::class);
+    }
+
+    public function liveSeance()
+    {
+        $now = (new Carbon())->toTimeString();
+
+        return Schedule::where('date', (new Carbon())->toDateString())
+            ->where('hall_id', $this->id)
+            ->where('start_time', '<', $now)
+            ->where('end_time', '>', $now)
+            ->first();
     }
 
     public function createSeats(): void

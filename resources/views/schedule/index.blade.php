@@ -10,6 +10,7 @@
                 <thead>
                 <tr>
                     <th>#ID</th>
+                    <th>Hall</th>
                     <th>Date</th>
                     <th>Film</th>
                     <th>Start</th>
@@ -21,13 +22,13 @@
                 @foreach($schedules as $schedule)
                     <tr>
                         <td>{{ $schedule->id }}</td>
+                        <td>{{ $schedule->hall->name }}</td>
                         <td>{{ $schedule->date }}</td>
                         <td>{{ $schedule->film->title }}</td>
                         <td>{{ $schedule->start_time }}</td>
                         <td>{{ $schedule->end_time }}</td>
                         <td>
                             <a href="{{route('schedules.show', [$schedule->id])}}"><i class="">view</i></a>
-                            <a href="{{route('schedules.edit', [$schedule->id])}}"><i class="">edit</i></a>
                             <a href="{{route('schedules.destroy', [$schedule->id])}}" onclick="event.preventDefault();
                                                      document.getElementById('delete-form').submit();" >
                                 <i class="fa fa-trash">delete</i>

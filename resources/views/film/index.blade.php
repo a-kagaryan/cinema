@@ -11,7 +11,8 @@
                 <tr>
                     <th>#ID</th>
                     <th>Title</th>
-                    <th>Description</th>
+                    <th>Duration</th>
+                    <th>Description(minute)</th>
                     <th>Wallpaper</th>
                     <th>Actions</th>
                 </tr>
@@ -21,6 +22,7 @@
                     <tr>
                         <td>{{ $film->id }}</td>
                         <td>{{ $film->title }}</td>
+                        <td>{{ $film->duration }}</td>
                         <td><pre>{{ $film->description }}</pre></td>
                         <td><img src="{{ asset(  'storage/' . $film->wallpaper) }}" alt="" width="150"></td>
                         <td>

@@ -28,4 +28,9 @@ class Schedule extends Model
     {
         return $this->belongsTo(Hall::class);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

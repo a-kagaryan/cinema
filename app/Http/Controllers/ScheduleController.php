@@ -7,9 +7,7 @@ use App\Models\Hall;
 use App\Models\Schedule;
 use App\Rules\ScheduleAvailable;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -79,7 +77,7 @@ class ScheduleController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Schedule  $schedule
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function show(Schedule $schedule)
     {
