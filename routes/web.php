@@ -19,11 +19,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function()
-{
+Route::group(['middleware' => 'auth'], function() {
     Route::resources([
         'halls' => \App\Http\Controllers\HallController::class,
-        'films' => \App\Http\Controllers\FilmController::class
+        'films' => \App\Http\Controllers\FilmController::class,
+        'schedules' => \App\Http\Controllers\ScheduleController::class,
     ]);
 });
 

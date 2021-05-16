@@ -131,6 +131,9 @@ class FilmController extends Controller
      */
     public function destroy(Film $film)
     {
-        //
+        Film::where('id', $film->id)->delete();
+
+        return back()
+            ->with('success', 'Film has been deleted');
     }
 }

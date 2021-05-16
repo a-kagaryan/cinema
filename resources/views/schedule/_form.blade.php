@@ -1,5 +1,5 @@
 
-{!! Form::model($film, ['route' => ["films.$action", $film->id], 'method' => $method, 'enctype' => 'multipart/form-data']); !!}
+{!! Form::model($schedule, ['route' => ["schedules.$action", $schedule->id], 'method' => $method]); !!}
 @if ($errors->any())
     <div class="alert alert-danger">
         <ol>
@@ -10,28 +10,23 @@
     </div>
 @endif
 <div class="form-group">
-    {{ Form::label('title', 'Title') }}
-    {{ Form::text('title', $film->title, ['class' => 'form-control']) }}
+    {{ Form::label('hall_id', 'Hall') }}
+    {{ Form::select('hall_id', $halls, null, ['class' => 'form-control']) }}
 </div>
 
 <div class="form-group">
-    {{ Form::label('description', 'Description') }}
-    {{ Form::textarea('description', $film->description, ['class' => 'form-control']) }}
+    {{ Form::label('film_id', 'Film') }}
+    {{ Form::select('film_id', $films, null, ['class' => 'form-control']) }}
 </div>
 
 <div class="form-group">
-    @if ($film->wallpaper)
-        <img src="{{ asset(  'storage/' . $film->wallpaper) }}" alt="" width="100">
-    @endif
-    {{ Form::label('file', 'WallPaper') }}
-    {{ Form::file('file') }}
+    {{ Form::label('date', 'Date') }}
+    {{ Form::date('date', $schedule->date, ['class' => 'form-control']) }}
 </div>
-
 <div class="form-group">
-    {{ Form::label('duration', 'Duration (minutes)') }}
-    {{ Form::number('duration', $film->duration, ['class' => 'form-control']) }}
+    {{ Form::label('date', 'Start Time') }}
+    {{ Form::time('start_time', $schedule->start_time, ['class' => 'form-control', 'format' => 'h:i:s']) }}
 </div>
-
 {{ Form::submit('Save') }}
 
 {!! Form::close() !!}

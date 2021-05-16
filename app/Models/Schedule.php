@@ -17,13 +17,15 @@ class Schedule extends Model
         'end_time'
     ];
 
+    public $timestamps = false;
+
     public function film()
     {
-        return $this->hasOne(Film::class);
+        return $this->belongsTo(Film::class);
     }
 
     public function hall()
     {
-        return $this->hasOne(Hall::class);
+        return $this->belongsTo(Hall::class);
     }
 }
